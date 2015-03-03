@@ -1,28 +1,45 @@
-<h1>Ammounts</h1>
+<h1>Data Entry for <%= Time.now.strftime("%B %Y")%></h1>
 
-<table>
+<p id="notice"><%= notice %></p>
+
+<% if this_month_records_exists == false %>
+  <p> Complete data entry for <month>
+  </p>
+  <button class="btn">	<%= form_tag data_entry_ammounts_path do %>
+  	                     
+  	                      <%= submit_tag "Data Entry" %>
+                          <% end %>
+    </button>
+  
+
+  <% else %>
+
+<table class="table">
   <thead>
     <tr>
       <th>Date</th>
-      <th>Ammount</th>
-      <th>Estimated</th>
-      <th colspan="3"></th>
+      <th><center>Ammount</center></th>
+      <th><center>Estimated</center></th>
+      <th>Account</th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @ammounts.each do |ammount| %>
+    <% @ammounts_this_month.each do |ammount| %>
       <tr>
         <td><%= ammount.date %></td>
-        <td><%= ammount.ammount %></td>
-        <td><%= ammount.estimated %></td>
-        <td><%= link_to 'Show', ammount %></td>
-        <td><%= link_to 'Edit', edit_ammount_path(ammount) %></td>
-        <td><%= link_to 'Destroy', ammount, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><center><i><%= best_in_place ammount, :ammount, :nil => "?" %></i></center></td>
+        <td><center><i><%= best_in_place ammount, :estimated, :type => :checkbox, :nil => "?" %></i></center></td>
+        <td><%= get_account_name(ammount.account_id) %></td>
+        <td>[<%= link_to 'S', ammount %> | 
+        <%= link_to 'E', edit_ammount_path(ammount) %> | 
+        <%= link_to 'D', ammount, method: :delete, data: { confirm: 'Are you sure?' } %>]</td>
       </tr>
     <% end %>
   </tbody>
 </table>
+ <% end %>
 
 <br>
 

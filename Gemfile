@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby "1.9.3"
 gem 'rails', '4.1.6'
 gem 'bcrypt-ruby', '~> 3.1.5'
+gem 'webrick', '1.3.1'
 
 gem 'capistrano-rvm',   group: :development
 gem 'capistrano-rails', group: :development

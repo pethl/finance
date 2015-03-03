@@ -16,6 +16,11 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status, Fixture::TEAM_TYPES %>
+  </div>
+  
+  <div class="field">
     <%= f.label :ticker %><br>
     <%= f.text_field :ticker %>
   </div>

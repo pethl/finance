@@ -4,6 +4,10 @@ module ApplicationHelper
     Invtype.where(:id => id).first.name
   end
   
+  def get_account_name(id)
+    Account.where(:id => id).first.name
+  end
+  
   # count how many ammount records have been recorded for specified account
   def ammounts_count(account_id)
     Ammount.where(:account_id => account_id).count
@@ -55,6 +59,17 @@ module ApplicationHelper
         #((ammounts.first.ammount.to_i- ammounts.second.ammount.to_i)/ammounts.second.ammount.to_i)   
     else
       return 0
+    end
+  end
+  
+  #
+  def this_month_records_exists
+    date = Time.now 
+    records_count = Ammount.where(:date =>(date.beginning_of_month..date.end_of_month)).count
+    if records_count > 0
+      return true
+    else
+      return false
     end
   end
   

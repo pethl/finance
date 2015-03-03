@@ -4,6 +4,7 @@ class AmmountsController < ApplicationController
   # GET /ammounts
   def index
     @ammounts = Ammount.all
+    @ammounts_this_month = Ammount.where(:date =>(Time.now.beginning_of_month..Time.now.end_of_month))
   end
 
   # GET /ammounts/1
@@ -43,6 +44,23 @@ class AmmountsController < ApplicationController
   def destroy
     @ammount.destroy
     redirect_to ammounts_url, notice: 'Ammount was successfully destroyed.'
+  end
+  
+  def data_entry
+    @accounts = Account.where(:status => 'Open')
+    
+    @accounts.each do |account|
+    
+    @ammount = Ammount.new(:date => Time.now, :account_id => account.id)
+
+        if @ammount.save
+          #do nothing and continue
+        else
+          redirect_to ammounts_path, notice: "An error has occurred."
+        end
+    
+    end
+    redirect_to ammounts_path, notice: "Begin data capture." 
   end
 
   private

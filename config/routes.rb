@@ -1,7 +1,9 @@
 Finance::Application.routes.draw do
   resources :accounts
 
-  resources :ammounts
+  resources :ammounts do
+     		 collection { post :data_entry }
+    	end
 
   resources :invtypes
 

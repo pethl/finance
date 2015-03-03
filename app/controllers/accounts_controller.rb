@@ -57,7 +57,7 @@ class AccountsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def account_params
-      params.require(:account).permit(:name, :ticker, :vat, :invtype_id)
+      params.require(:account).permit(:name, :ticker, :vat, :invtype_id, :status)
     end
     
     def graph_data(ammounts)

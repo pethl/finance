@@ -7,6 +7,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Status</th>
       <th>Ticker</th>
       <th>Vat?</th>
       <th>Ammount</th>
@@ -20,6 +21,7 @@
   <tbody>
       <tr>
         <td><%= link_to account.name, account %></td>
+        <td><%= account.status %></td>
         <td><%= account.ticker %></td>
         <td><%= account.vat %></td>
         <td>£<%= get_latest_ammount(account) %></td>
