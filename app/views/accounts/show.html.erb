@@ -1,0 +1,43 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h3><%= @account.name %></h3>
+</p>
+
+
+<p>
+  <strong>Type:</strong>
+  <%= get_invtype_name(@account.invtype_id) %>
+</p>
+
+<p>
+  <strong>VAT:</strong>
+  <%= @account.vat %>
+</p>
+
+<p>
+  <strong>Ticker:</strong>
+  <%= @account.ticker %>
+</p>
+
+<p>
+  <strong>Ammount: £</strong> 
+  <%= get_latest_ammount_formatted(@account) %>
+</p>
+
+<p>
+  <strong>Latest change: £</strong> 
+  <%= get_latest_change(@account) %>
+</p>
+
+<p>
+  <strong>Latest percentage:</strong> 
+  <%= get_latest_percentage_change(@account) %>
+</p>
+
+<%= line_chart @graph_ammounts %>
+
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>

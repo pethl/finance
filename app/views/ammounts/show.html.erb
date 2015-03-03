@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @ammount.date %>
+</p>
+
+<p>
+  <strong>Ammount:</strong>
+  <%= @ammount.ammount %>
+</p>
+
+<p>
+  <strong>Estimated:</strong>
+  <%= @ammount.estimated %>
+</p>
+
+<%= link_to 'Edit', edit_ammount_path(@ammount) %> |
+<%= link_to 'Back', ammounts_path %>

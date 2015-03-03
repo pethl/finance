@@ -1,0 +1,29 @@
+<h1>Categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invtypes.each do |invtype| %>
+      <tr>
+        <td><%= invtype.name %></td>
+        <td>[ <%= link_to 'S', invtype %> |
+        <%= link_to 'E', edit_invtype_path(invtype) %> |
+        <%= link_to 'D', invtype, method: :delete, data: { confirm: 'Are you sure?' } %> ]   </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '>> Add New Type', new_invtype_path %>
+
+<br><br>
+
+

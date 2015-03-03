@@ -1,0 +1,33 @@
+<%= form_for(@ammount) do |f| %>
+  <% if @ammount.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ammount.errors.count, "error") %> prohibited this ammount from being saved:</h2>
+
+      <ul>
+      <% @ammount.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :account %><br>
+    <%= f.collection_select :account_id, Account.all, :id, :name, :include_blank => true %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.date_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :ammount %><br>
+    <%= f.text_field :ammount %>
+  </div>
+  <div class="field">
+    <%= f.label :estimated %><br>
+    <%= f.check_box :estimated %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
