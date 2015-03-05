@@ -33,11 +33,15 @@ class AmmountsController < ApplicationController
 
   # PATCH/PUT /ammounts/1
   def update
-    if @ammount.update(ammount_params)
-      redirect_to @ammount, notice: 'Ammount was successfully updated.'
-    else
-      render :edit
-    end
+    respond_to do |format|
+            if @ammount.update(ammount_params)
+               format.html {redirect_to @ammount, notice: 'Ammount was successfully updated.'}
+               format.json { render json: @ammount}
+            else
+               format.html {render :edit}
+               format.json {render :json => @ammount.errors.full_messages, :status => :unprocessable_entity }
+            end
+      end
   end
 
   # DELETE /ammounts/1

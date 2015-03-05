@@ -31,7 +31,7 @@
         <td><%= ammount.date %></td>
         <td><center><i><%= best_in_place ammount, :ammount, :nil => "?" %></i></center></td>
         <td><center><i><%= best_in_place ammount, :estimated, :type => :checkbox, :nil => "?" %></i></center></td>
-        <td><%= get_account_name(ammount.account_id) %></td>
+        <td><%= Account.get_name(ammount.account_id) %></td>
         <td>[<%= link_to 'S', ammount %> | 
         <%= link_to 'E', edit_ammount_path(ammount) %> | 
         <%= link_to 'D', ammount, method: :delete, data: { confirm: 'Are you sure?' } %>]</td>
@@ -44,3 +44,6 @@
 <br>
 
 <%= link_to '>> add new Ammount', new_ammount_path %>
+
+<br>
+

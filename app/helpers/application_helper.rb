@@ -1,13 +1,5 @@
 module ApplicationHelper
   
-  def get_invtype_name(id)
-    Invtype.where(:id => id).first.name
-  end
-  
-  def get_account_name(id)
-    Account.where(:id => id).first.name
-  end
-  
   # count how many ammount records have been recorded for specified account
   def ammounts_count(account_id)
     Ammount.where(:account_id => account_id).count
@@ -61,6 +53,34 @@ module ApplicationHelper
       return 0
     end
   end
+
+
+def get_last_year_ammount(account_id)
+   if ammounts_count(account_id) > 11
+      last_year_amnt = get_ammounts(account_id)[11]
+      return last_year_amnt.ammount
+    else
+      return 0
+    end
+end
+
+def get_annual_change(account_id)
+  if ammounts_count(account_id) > 11
+      return get_latest_ammount(account_id).to_f - get_last_year_ammount(account_id).to_f
+    else
+      return 0
+    end
+end
+
+def get_annual_percentage_change(account_id)
+  if ammounts_count(account_id) > 11
+      return number_to_percentage(((get_annual_change(account_id).to_f) / (get_last_year_ammount(account_id).to_f))*100, precision: 0)
+    else
+      return 0
+    end
+end
+
+
   
   #
   def this_month_records_exists

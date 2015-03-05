@@ -1,48 +1,75 @@
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <h3><%= @account.name %></h3>
-</p>
+<%= link_to 'All Accounts', accounts_path %>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th><h2><%= @account.name %></h2></th>
+      <th>Month</th>
+      <th>Annual</th>
+    </tr>
+  </thead>
 
-<p>
-  <strong>Type:</strong>
-  <%= get_invtype_name(@account.invtype_id) %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @account.status %>
-</p>
-
-<p>
-  <strong>VAT:</strong>
-  <%= @account.vat %>
-</p>
-
-<p>
-  <strong>Ticker:</strong>
-  <%= @account.ticker %>
-</p>
-
-<p>
-  <strong>Ammount: £</strong> 
-  <%= get_latest_ammount_formatted(@account) %>
-</p>
-
-<p>
-  <strong>Latest change: £</strong> 
-  <%= get_latest_change(@account) %>
-</p>
-
-<p>
-  <strong>Latest percentage:</strong> 
-  <%= get_latest_percentage_change(@account) %>
-</p>
+  <tbody>
+      <tr>
+        <td>Type:<br><strong><%= Invtype.get_name(@account.invtype_id) %></strong></td>
+        <td>Ammount: £<br><strong><%= get_latest_ammount_formatted(@account) %></strong></td>
+        <td>Ammount: £<br><strong><%= get_last_year_ammount(@account) %></strong></td>
+      </tr>
+      <tr>
+        <td>Status:<br><strong><strong><%= @account.status %></strong></td>
+        <td>Change: £<br><strong><%= get_latest_change(@account) %></strong></td>
+        <td>Change: £<br><strong><%= get_annual_change(@account) %></strong></td>
+      </tr>
+      <tr>
+        <td>VAT:<br><strong><%= @account.vat %></td>
+        <td>Percentage:<br><strong><%= get_latest_percentage_change(@account) %></strong></td>
+        <td>Percentage:<br><strong><%= get_annual_percentage_change(@account) %></strong></td>
+      </tr>              
+  </tbody>
+</table>
 
 <%= line_chart @graph_ammounts %>
 
+<% get_ammounts(@account)%>
 
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= get_ammounts(@account)[11].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[10].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[9].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[8].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[7].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[6].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[5].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[4].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[3].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[2].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[1].date.strftime("%b, %Y") %></th>
+      <th><%= get_ammounts(@account)[0].date.strftime("%b, %Y") %></th>                  
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+      <td><center><%= get_ammounts(@account)[11].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[10].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[9].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[8].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[7].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[6].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[5].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[4].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[3].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[2].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[1].ammount.to_i %></td>
+      <td><center><%= get_ammounts(@account)[0].ammount.to_i %></td>
+      </tr>               
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_account_path(@account) %>
+

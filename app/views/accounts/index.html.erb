@@ -1,17 +1,18 @@
-<h1>Accounts</h1>
 
 <% @accounts_by_type.each do |type, accounts| %>
-<h2><%= get_invtype_name(type) %></h2>
+<h2><%= Invtype.get_name(type) %></h2>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
       <th>Status</th>
       <th>Ticker</th>
       <th>Vat?</th>
-      <th>Ammount</th>
-      <th>Change(%)</th>     
+      <th>Current<br>Ammount</th>
+      <th>Last Month<br>Change(%)</th>     
+      <th>Last Year<br>Ammount</th>
+      <th>Annual<br>Change(%)</th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -26,6 +27,8 @@
         <td><%= account.vat %></td>
         <td>£<%= get_latest_ammount(account) %></td>
         <td>£<%= get_latest_change(account) %> (<%= get_latest_percentage_change(account) %>)</td>        
+        <td>£<%= get_last_year_ammount(account) %></td>
+        <td>£<%= get_annual_change(account) %> (<%= get_annual_percentage_change(account) %>)</td>
         <td>[<%= link_to 'Show', account %> | 
         <%= link_to 'Edit', edit_account_path(account) %> | 
         <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %>]</td>
