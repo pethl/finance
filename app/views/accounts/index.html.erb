@@ -1,44 +1,92 @@
-
-<% @accounts_by_type.each do |type, accounts| %>
-<h2><%= Invtype.get_name(type) %></h2>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Ticker</th>
-      <th>Vat?</th>
-      <th>Current<br>Ammount</th>
-      <th>Last Month<br>Change(%)</th>     
-      <th>Last Year<br>Ammount</th>
-      <th>Annual<br>Change(%)</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-  
-
-    <% accounts.each do |account| %>
-  <tbody>
-      <tr>
-        <td><%= link_to account.name, account %></td>
-        <td><%= account.status %></td>
-        <td><%= account.ticker %></td>
-        <td><%= account.vat %></td>
-        <td>£<%= get_latest_ammount(account) %></td>
-        <td>£<%= get_latest_change(account) %> (<%= get_latest_percentage_change(account) %>)</td>        
-        <td>£<%= get_last_year_ammount(account) %></td>
-        <td>£<%= get_annual_change(account) %> (<%= get_annual_percentage_change(account) %>)</td>
-        <td>[<%= link_to 'Show', account %> | 
-        <%= link_to 'Edit', edit_account_path(account) %> | 
-        <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %>]</td>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Summary Position
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+      <table class="table">
+         <thead>
+           <tr>
+           <th>Accounts:</th>
+           <th>Current Total:</th>
       </tr>
-<% end %>    
-  </tbody>
-</table>
+     </thead>
+      <tbody>
+          <tr>
+            <td> <%= Account.where(:status => "Open").count %> Open</td>
+            <td><%= number_to_currency(get_total_worth, :precision => 0, unit: "£", separator: ",") %></td>
+           </tr> 
+           <tr>
+             <td> <%= Account.where(:status => "Closed").count %> Closed</td>
+             <td></td>
+            </tr>  
+       </tbody>
+     </table>
 
-<% end %>
+      </a>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Account Detail
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+       <% @accounts_by_type.each do |type, accounts| %>
+       <h2><%= Invtype.get_name(type) %></h2>
 
-<br>
+       <table class="table table-striped">
+         <thead>
+           <tr>
+             <th>Name</th>
+             <th>Status</th>
+             <th>Ticker</th>
+             <th>Vat?</th>
+             <th>Current<br>Ammount</th>
+             <th>Last Month<br>Change(%)</th>     
+             <th>Last Year<br>Ammount</th>
+             <th>Annual<br>Change(%)</th>
+             <th colspan="1"></th>
+           </tr>
+         </thead>
+
+
+           <% accounts.each do |account| %>
+         <tbody>
+             <tr>
+               <td><%= link_to account.name, account %></td>
+               <td><%= account.status %></td>
+               <td><%= account.ticker %></td>
+               <td><%= account.vat %></td>
+               <td>£<%= get_latest_ammount(account) %></td>
+               <td>£<%= get_latest_change(account) %> (<%= get_latest_percentage_change(account) %>)</td>        
+               <td>£<%= get_last_year_ammount(account) %></td>
+               <td>£<%= get_annual_change(account) %> (<%= get_annual_percentage_change(account) %>)</td>
+               <td>[<%= link_to 'Show', account %> | 
+               <%= link_to 'Edit', edit_account_path(account) %> | 
+               <%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %>]</td>
+             </tr>
+       <% end %>    
+         </tbody>
+       </table>
+
+       <% end %>
+
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
 
 <%= link_to '>> add new Account', new_account_path %>

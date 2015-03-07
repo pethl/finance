@@ -53,6 +53,16 @@ module ApplicationHelper
       return 0
     end
   end
+  
+  # get the lastest value of each open account
+  def get_total_worth
+    accounts = Account.where(:status => "Open")
+    total_worth = 0
+    accounts.each do |account|
+      total_worth += get_latest_ammount(account).to_i
+    end
+    return total_worth  
+  end
 
 
 def get_last_year_ammount(account_id)

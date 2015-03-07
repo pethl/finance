@@ -1,19 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <h3><%= Account.get_name(@future.account_id) %></h3>
-  
+  <h3><%= link_to Account.get_name(@future.account_id), account_path(@future.account_id) %></h3>
 </p>
 
 <p>
-  <strong>Years:</strong>
-  <%= @future.years %>
+  <strong>Descrption:</strong>
+  <%= Future.get_desc(@future) %>
 </p>
 
-<p>
-  <strong>Rate:</strong>
-  <%= @future.rate %>
-</p>
 
 <table class="table">
   <thead>
@@ -27,7 +22,7 @@
     <% @future_line_items.each do |future_line_item| %>
       <tr>
         <td><%= future_line_item.year %></td>
-        <td><%= number_with_precision(future_line_item.ammount, :precision => 0) %></td>
+        <td><%= number_to_currency(future_line_item.ammount, :precision => 0,  unit: "£", separator: ",") %></td>
       </tr>
     <% end %>
   </tbody>
