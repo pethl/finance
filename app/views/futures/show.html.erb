@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h3><%= Account.get_name(@future.account_id) %></h3>
+  
+</p>
+
+<p>
+  <strong>Years:</strong>
+  <%= @future.years %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @future.rate %>
+</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Ammount</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @future_line_items.each do |future_line_item| %>
+      <tr>
+        <td><%= future_line_item.year %></td>
+        <td><%= number_with_precision(future_line_item.ammount, :precision => 0) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Edit', edit_future_path(@future) %> |
+<%= link_to 'Back', futures_path %>

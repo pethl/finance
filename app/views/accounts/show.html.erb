@@ -71,5 +71,29 @@
   </tbody>
 </table>
 
+<h3>Futures</h3><%= link_to "Make future forecast", new_future_path %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>F_ID</th>
+      <th>Years</th>
+      <th>Rate</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @account.futures.each do |future| %>
+      <tr>
+        <td><%= link_to "f_id", future_path(future.id) %></td>
+        <td><%= future.years %></td>
+        <td><%= future.rate %></td>
+        <td><%= number_with_precision(Future.get_value(future), :precision => 0) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_account_path(@account) %>
 

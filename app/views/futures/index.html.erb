@@ -1,0 +1,31 @@
+<h1>Futures</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Years</th>
+      <th>Rate</th>
+      <th>child</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @futures.each do |future| %>
+      <tr>
+        <td><%= Account.get_name(future.account_id) %></td>
+        <td><%= future.years %></td>
+        <td><%= future.rate %></td>
+        <td><%= future.future_line_items.count %></td>
+        <td><%= link_to 'Show', future %></td>
+        <td><%= link_to 'Edit', edit_future_path(future) %></td>
+        <td><%= link_to 'Destroy', future, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Future', new_future_path %>

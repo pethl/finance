@@ -1,0 +1,2 @@
+module FutureLineItemsHelper
+end

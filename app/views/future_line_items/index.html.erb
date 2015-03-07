@@ -1,0 +1,29 @@
+<h1>Listing future_line_items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Future</th>
+      <th>Year</th>
+      <th>Ammount</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @future_line_items.each do |future_line_item| %>
+      <tr>
+        <td><%= future_line_item.future_id %></td>
+        <td><%= future_line_item.year %></td>
+        <td><%= future_line_item.ammount %></td>
+        <td><%= link_to 'Show', future_line_item %></td>
+        <td><%= link_to 'Edit', edit_future_line_item_path(future_line_item) %></td>
+        <td><%= link_to 'Destroy', future_line_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Future line item', new_future_line_item_path %>

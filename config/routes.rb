@@ -1,4 +1,8 @@
 Finance::Application.routes.draw do
+  resources :future_line_items
+
+  resources :futures
+
   resources :accounts
 
   resources :ammounts do

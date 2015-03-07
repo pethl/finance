@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Future:</strong>
+  <%= @future_line_item.future_id %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @future_line_item.year %>
+</p>
+
+<p>
+  <strong>Ammount:</strong>
+  <%= @future_line_item.ammount %>
+</p>
+
+<%= link_to 'Edit', edit_future_line_item_path(@future_line_item) %> |
+<%= link_to 'Back', future_line_items_path %>
