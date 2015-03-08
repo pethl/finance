@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :status %><br>
-    <%= f.text_field(:status, Account::STATUS_TYPES) %>
+    <%= f.select(:status, Account::STATUS_TYPES) %>
   </div>
   
   <div class="field">
@@ -32,10 +32,7 @@
     <%= f.label :invtype_id %><br>
     <%= f.collection_select :invtype_id, Invtype.all, :id, :name, :include_blank => true %>
   </div>
-  <div class="field">
-    <%= f.label :ammount_id %><br>
-    <%= f.number_field :ammount_id %>
-  </div>
+ 
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -3,8 +3,7 @@
 <p id="notice"><%= notice %></p>
 
 <% if this_month_records_exists == false %>
-  <p> Complete data entry for <month>
-  </p>
+ <br><br>
   <button class="btn">	<%= form_tag data_entry_ammounts_path do %>
   	                     
   	                      <%= submit_tag "Data Entry" %>
@@ -19,7 +18,9 @@
     <tr>
       <th>Date</th>
       <th><center>Ammount</center></th>
+      <th><center>Last Month</center></th>
       <th><center>Estimated</center></th>
+      <th><center>Share Price</center></th>
       <th>Account</th>
       <th colspan="1"></th>
     </tr>
@@ -30,7 +31,9 @@
       <tr>
         <td><%= ammount.date %></td>
         <td><center><i><%= best_in_place ammount, :ammount, :nil => "?" %></i></center></td>
+        <td><center><%= get_latest_ammount(ammount.account_id) %></center></td>
         <td><center><i><%= best_in_place ammount, :estimated, :type => :checkbox, :nil => "?" %></i></center></td>
+        <td><center><%= ammount.share_price %></center></td>
         <td><%= Account.get_name(ammount.account_id) %></td>
         <td>[<%= link_to 'S', ammount %> | 
         <%= link_to 'E', edit_ammount_path(ammount) %> | 
@@ -41,7 +44,7 @@
 </table>
  <% end %>
 
-<br>
+<br><br>
 
 <%= link_to '>> add new Ammount', new_ammount_path %>
 

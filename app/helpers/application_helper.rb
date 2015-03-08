@@ -13,7 +13,11 @@ module ApplicationHelper
   # get the latest amount else return zero
   def get_latest_ammount(account_id)
     if ammounts_count(account_id) > 0
-      latest_amnt = get_ammounts(account_id).first
+      if ((get_ammounts(account_id).first.ammount.to_i)) == 0
+        latest_amnt = get_ammounts(account_id).second        
+      else  
+        latest_amnt = get_ammounts(account_id).first
+      end
       return latest_amnt.ammount
     else
       return 0

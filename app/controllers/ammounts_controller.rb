@@ -54,9 +54,11 @@ class AmmountsController < ApplicationController
     @accounts = Account.where(:status => 'Open')
     
     @accounts.each do |account|
-    
-    @ammount = Ammount.new(:date => Time.now, :account_id => account.id)
-
+    if account.ticker.blank?
+      @ammount = Ammount.new(:date => Time.now, :account_id => account.id, :ammount => 0)
+    else
+      @ammount = Ammount.new(:date => Time.now, :account_id => account.id, :ammount => ((Account.get_share_count(account))*(Account.get_share_price(account.ticker))), :share_price => (Account.get_share_price(account.ticker)))    
+    end
         if @ammount.save
           #do nothing and continue
         else
@@ -75,6 +77,6 @@ class AmmountsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def ammount_params
-      params.require(:ammount).permit(:date, :ammount, :estimated, :account_id)
+      params.require(:ammount).permit(:date, :ammount, :estimated, :account_id, :share_price)
     end
 end

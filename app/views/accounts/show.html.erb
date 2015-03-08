@@ -17,6 +17,7 @@
         <td>Type:<br><strong><%= Invtype.get_name(@account.invtype_id) %></strong></td>
         <td>Ammount: £<br><strong><%= get_latest_ammount_formatted(@account) %></strong></td>
         <td>Ammount: £<br><strong><%= get_last_year_ammount(@account) %></strong></td>
+        
       </tr>
       <tr>
         <td>Status:<br><strong><strong><%= @account.status %></strong></td>
@@ -27,7 +28,12 @@
         <td>VAT:<br><strong><%= @account.vat %></td>
         <td>Percentage:<br><strong><%= get_latest_percentage_change(@account) %></strong></td>
         <td>Percentage:<br><strong><%= get_annual_percentage_change(@account) %></strong></td>
-      </tr>              
+      </tr>    
+      <tr>
+      <td>Share price: <br><strong><%= Account.get_share_price(@account.ticker)%></strong></td>
+      <td></td>
+      <td></td>
+      </tr>          
   </tbody>
 </table>
 

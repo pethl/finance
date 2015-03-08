@@ -12,6 +12,7 @@ gem 'capistrano-rails', group: :development
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg', '0.17.1'
+gem 'quandl_ruby'
 
 gem 'heroku'
 gem 'rails_12factor', group: :production
