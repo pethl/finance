@@ -2,36 +2,36 @@
 <p id="notice"><%= notice %></p>
 
 <%= link_to 'All Accounts', accounts_path %>
-
+<h2><%= @account.name %></h2>
 <table class="table">
   <thead>
     <tr>
-      <th><h2><%= @account.name %></h2></th>
-      <th>Month</th>
+      <th><%= Invtype.get_name(@account.invtype_id) %></th>
+      <th>Month / <%= get_ammounts(@account).first.date.strftime("%b, %Y") %></th>
       <th>Annual</th>
     </tr>
   </thead>
 
   <tbody>
       <tr>
-        <td>Type:<br><strong><%= Invtype.get_name(@account.invtype_id) %></strong></td>
-        <td>Ammount: <br><strong><%= get_latest_ammount_formatted(@account) %></strong></td>
+        <td>Status:<br><strong><strong><%= @account.status %></strong></td>
+        <td>Ammount: <br><strong><%= number_to_currency(get_latest_ammount(@account), :precision => 0, unit: "£", separator: ",") %></strong></td>
         <td>Ammount: <br><strong><%= number_to_currency(get_last_year_ammount(@account), :precision => 0, unit: "£", separator: ",") %></strong></td>
         
       </tr>
       <tr>
-        <td>Status:<br><strong><strong><%= @account.status %></strong></td>
+        <td>VAT:<br><strong><%= @account.vat %></td>
         <td>Change: <br><strong><%= number_to_currency(get_latest_change(@account), :precision => 0, unit: "£", separator: ",") %></strong></td>
         <td>Change: <br><strong><%= number_to_currency(get_annual_change(@account), :precision => 0, unit: "£", separator: ",") %></strong></td>
       </tr>
       <tr>
-        <td>VAT:<br><strong><%= @account.vat %></td>
-        <td>Percentage:<br><strong><%= get_latest_percentage_change(@account) %></strong></td>
-        <td>Percentage:<br><strong><%= get_annual_percentage_change(@account) %></strong></td>
+        <td>Current Share Price: <br><strong><%= Account.get_share_price(@account.ticker) %>
+        <%= @account.currency %></strong></td>
+        <td>Percentage diff :<br><strong><%= get_latest_percentage_change(@account) %></strong></td>
+        <td>Percentage diff :<br><strong><%= get_annual_percentage_change(@account) %></strong></td>
       </tr>    
       <tr>
-      <td>Share price: <br><strong><%= Account.get_share_price(@account.ticker) %>
-      <%= @account.currency %></strong></td>
+      <td></td>
       <td></td>
       <td></td>
       </tr>          
