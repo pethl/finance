@@ -1,7 +1,8 @@
 simple personal finance custom db
+
 allows:
 -creation of accounts
 -categorisation of accounts
 -data capture of account ammounts by month
 -can retrieve share price and currency value when ticker or currency present on account
-dashboard to show total value and account summary with changes over month and over 12 months
+-dashboard to show total value and account summary with changes over month and over 12 months
