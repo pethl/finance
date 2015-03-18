@@ -19,5 +19,7 @@ class Account < ActiveRecord::Base
   def self.get_share_count(account)
      self.find(account).share_count
   end
+
+  
   
 end

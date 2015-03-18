@@ -13,6 +13,7 @@ gem 'capistrano-rails', group: :development
 
 gem 'pg', '0.17.1'
 gem 'quandl_ruby'
+gem 'goog_currency'
 
 gem 'heroku'
 gem 'rails_12factor', group: :production

@@ -1,5 +1,7 @@
 module ApplicationHelper
   
+
+  
   # count how many ammount records have been recorded for specified account
   def ammounts_count(account_id)
     Ammount.where(:account_id => account_id).count
@@ -28,7 +30,7 @@ module ApplicationHelper
   def get_latest_ammount_formatted(account_id)
     if ammounts_count(account_id) > 0
       latest_amnt = get_ammounts(account_id).first
-      string = latest_amnt.ammount.to_s + " at " + latest_amnt.date.to_s
+      string = (latest_amnt.ammount.to_s) + " at " + latest_amnt.date.to_s
       return string
     else
       string =  "no ammounts recorded"

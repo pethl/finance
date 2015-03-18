@@ -57,7 +57,9 @@ class AmmountsController < ApplicationController
     if account.ticker.blank?
       @ammount = Ammount.new(:date => Time.now, :account_id => account.id, :ammount => 0)
     else
-      @ammount = Ammount.new(:date => Time.now, :account_id => account.id, :ammount => ((Account.get_share_count(account))*(Account.get_share_price(account.ticker))), :share_price => (Account.get_share_price(account.ticker)))    
+      share_price = Account.get_share_price(account.ticker)
+      share_price_gbp = GoogCurrency.usd_to_gbp(share_price)
+      @ammount = Ammount.new(:date => Time.now, :account_id => account.id, :ammount => ((Account.get_share_count(account))*(share_price_gbp.to_f)), :share_price => (Account.get_share_price(account.ticker)))    
     end
         if @ammount.save
           #do nothing and continue

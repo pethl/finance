@@ -2,6 +2,7 @@
 require File.expand_path('../application', __FILE__)
 require 'quandl'
 
+
 # Initialize the rails application
 Finance::Application.initialize!
 
